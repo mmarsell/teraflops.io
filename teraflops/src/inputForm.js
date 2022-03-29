@@ -17,10 +17,10 @@ class InputForm extends React.Component{
     handleSubmit(event) {
         
         if (this.state.value == ''){
-            alert('input cannot be empty')
+            console.log('input cannot be empty')
         }
         else {
-            alert('ticker submitted: ' + this.state.value);
+            console.log('ticker submitted: ' + this.state.value);
         }
         event.preventDefault();
     }
