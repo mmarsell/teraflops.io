@@ -23,7 +23,7 @@ function InputForm() {
     }
 
     function handleValidation() {
-        if (validTickers.indexOf(ticker) == -1){ return false;}
+        if (validTickers.indexOf(ticker.toLocaleUpperCase()) == -1){ return false;}
         else {return true;}
     }
 
@@ -44,7 +44,7 @@ function InputForm() {
                         <form onSubmit={handleSubmit}>
                             <label>
                                 Symbol/Name:
-                                <input placeholder="MSFT, Tesla, etc." type="text" value={ticker} style={{marginLeft:5}} onChange={(e) => setTicker(e.target.value.toLocaleUpperCase())} required />
+                                <input placeholder="MSFT, Tesla, etc." type="text" value={ticker} style={{marginLeft:5}} onChange={(e) => setTicker(e.target.value)} required />
                             </label>
 
                             <button style={{marginLeft: 20}} aria-label="submit"> submit </button>
