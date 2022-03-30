@@ -1,32 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-class InputForm extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {value: ''};
-    
+import {useState} from 'react';
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+function InputForm() {
+    const validTickers = ['MSFT' , 'TSLA'];
+    const [ticker, setTicker] = useState("");
+    const [errorMessage, setMessage] = useState("");
 
-    handleChange(event) {
-        this.setState({value: event.target.value});
-    }
-
-    handleSubmit(event) {
-        
-        if (this.state.value == ''){
-            alert('input cannot be empty')
+    const handleSubmit =(event) => {
+        event.preventDefault();
+        console.log(`Ticker submitted ${ticker}`)
+        setTicker("");
+        let validated = handleValidation();
+        if (validated){
+            setMessage("")
+            // call python API with ticker
         }
         else {
-            alert('ticker submitted: ' + this.state.value);
+            console.log('ticker not valid.');
+            setMessage("Non-valid identifier")
         }
-        event.preventDefault();
     }
 
-    render() {
-        return (
+    function handleValidation() {
+        if (validTickers.indexOf(ticker) == -1){ return false;}
+        else {return true;}
+    }
+
+    return (
         <div style={{ height:"100vh",display:"flex", justifyContent:"center", alignItems:"center"}}>
             <div style={{width:300}} className="window">
                 <div className='title-bar'>
@@ -40,19 +41,20 @@ class InputForm extends React.Component{
 
                 <div className='window-body'>
                     <div className='field-row' style={{justifyContent:'center'}}> 
-                        <form onSubmit={this.handleSubmit}>
+                        <form onSubmit={handleSubmit}>
                             <label>
-                                Ticker:
-                                <input type="text" value={this.state.value} onChange={this.handleChange} />
+                                Symbol/Name:
+                                <input placeholder="MSFT, Tesla, etc." type="text" value={ticker} style={{marginLeft:5}} onChange={(e) => setTicker(e.target.value.toLocaleUpperCase())} required />
                             </label>
-                            <button aria-label="submit"> submit </button>
+
+                            <button style={{marginLeft: 20}} aria-label="submit"> submit </button>
                         </form>
                     </div>
+                    <p className='error' style={{color:'red'}}>{errorMessage}</p>
                 </div>
             </div>
         </div>
 );
     }
-}
 
 export default InputForm;
