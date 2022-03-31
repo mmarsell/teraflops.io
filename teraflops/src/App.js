@@ -1,6 +1,9 @@
 import './App.css';
+import InputForm from './inputForm';
+import React from 'react';
 
-function App() {
+const App = () => {
+    return (<div><InputForm/></div>)
 }
 
 export default App;

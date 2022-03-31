@@ -6,7 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "98.css"
 
-ReactDOM.render(<InputForm />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 // reportWebVitals();
 
 
