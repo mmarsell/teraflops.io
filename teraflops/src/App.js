@@ -1,9 +1,23 @@
-import './App.css';
 import InputForm from './inputForm';
+import {useState, useEffect} from 'react';
 import React from 'react';
 
-const App = () => {
-    return (<div><InputForm/></div>)
+function App() {
+    const [state, setState] = useState({})
+
+    useEffect(() => {
+        fetch("/api").then(response => {
+            if(response.status == 200){
+                return response.json()
+            }
+        }).then(data => console.log(data))
+        .then(error => console.log(error))
+    })
+    return (
+        <div className="App">
+            <InputForm/>
+        </div>
+    );
 }
 
 export default App;
