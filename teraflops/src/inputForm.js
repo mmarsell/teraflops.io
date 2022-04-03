@@ -1,30 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {useState} from 'react';
+import APIService from './Components/APIService'
 
-function InputForm() {
+function InputForm (props) {
     const validTickers = ['MSFT' , 'TSLA'];
     const [ticker, setTicker] = useState("");
     const [errorMessage, setMessage] = useState("");
 
     const handleSubmit =(event) => {
         event.preventDefault();
-        console.log(`Ticker submitted ${ticker}`)
+        queryStock()
         setTicker("");
-        let validated = handleValidation();
-        if (validated){
-            setMessage("")
-            // call python API with ticker
-        }
-        else {
-            console.log('ticker not valid.');
-            setMessage("Non-valid identifier")
-        }
+        // let validated = handleValidation();
+        // if (validated){
+        //     setMessage("")
+        //     // call python API with ticker
+        // }
+        // else {
+        //     console.log('ticker not valid.');
+        //     setMessage("Non-valid identifier")
+        // }
     }
 
     function handleValidation() {
         if (validTickers.indexOf(ticker.toLocaleUpperCase()) == -1){ return false;}
         else {return true;}
+    }
+
+    const queryStock = () => {
+        APIService.PutStock({ticker})
+        .then((response) => console.log(response))
+        .catch(error => console.log('error', error))
     }
 
     return (

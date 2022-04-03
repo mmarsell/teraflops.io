@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import anomaly_detection as ad
-from flask import Flask
+from flask import Flask, current_app, jsonify, request
 
 app = Flask(__name__)
 
@@ -13,6 +13,11 @@ def index():
     return {
         "key" : "test"
     }
+@app.route('/query', methods=['POST'], strict_slashes=False)
+def choose_stock():
+    stock = request.json['ticker']
+    print(stock)
+    return {'key': 'success'}
 
 ticker = 'TSLA'
 if __name__ == '__main__':

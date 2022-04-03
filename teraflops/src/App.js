@@ -13,6 +13,11 @@ function App() {
         }).then(data => console.log(data))
         .then(error => console.log(error))
     })
+
+    const queriedStock = (stock) => {
+        console.log(stock)
+    }
+    
     return (
         <div className="App">
             <InputForm/>
@@ -20,4 +25,6 @@ function App() {
     );
 }
 
+
 export default App;
+
