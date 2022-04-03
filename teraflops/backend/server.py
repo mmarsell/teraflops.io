@@ -16,10 +16,12 @@ def index():
 @app.route('/query', methods=['POST'], strict_slashes=False)
 def choose_stock():
     stock = request.json['ticker']
-    print(stock)
-    return {'key': 'success'}
+    yf_stock = yf.Ticker(stock)
+    history = yf_stock.history(period="max")
+    history['Date'] = history.index.astype(str)
+    print(history)
+    return history.to_json()
 
-ticker = 'TSLA'
 if __name__ == '__main__':
     app.run()
 
