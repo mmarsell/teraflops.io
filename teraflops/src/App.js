@@ -1,9 +1,10 @@
 import InputForm from './inputForm';
+import LineChart from './Components/LineChart';
 import {useState, useEffect} from 'react';
 import React from 'react';
 
 function App() {
-    const [state, setState] = useState({})
+    const [state, setState] = useState({});
 
     useEffect(() => {
         fetch("/api").then(response => {
@@ -12,9 +13,9 @@ function App() {
             }
         }).then(data => console.log(data))
         .then(error => console.log(error))
-    })
+    });
 
-    const queriedStock = (stock) => {
+    function gotStock(stock){
         console.log(stock)
     }
     

@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {useState} from 'react';
 import APIService from './Components/APIService'
+import LineChart from './Components/LineChart';
+import {Line} from 'react-chartjs-2'
+import App from './App';
 
 function InputForm (props) {
     const validTickers = ['MSFT' , 'TSLA'];
@@ -30,7 +33,7 @@ function InputForm (props) {
 
     const queryStock = () => {
         APIService.PutStock({ticker})
-        .then((response) => console.log(response))
+        .then((response) => App.gotStock(response))
         .catch(error => console.log('error', error))
     }
 
@@ -54,7 +57,7 @@ function InputForm (props) {
                                 <input placeholder="MSFT, Tesla, etc." type="text" value={ticker} style={{marginLeft:5}} onChange={(e) => setTicker(e.target.value)} required />
                             </label>
 
-                            <button style={{marginLeft: 20}} aria-label="submit"> submit </button>
+                            <button style={{marginLeft: 20}} aria-label="submit"> Submit </button>
                         </form>
                     </div>
                     <p className='error' style={{color:'red'}}>{errorMessage}</p>
